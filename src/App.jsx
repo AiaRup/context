@@ -1,6 +1,6 @@
 import React from 'react';
-import {useState} from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import { AppGlobalProvider } from '../src/common/contexts'
 import './App.scss';
 import Spaceships from './components/Spaceships';
 import Vehicles from './components/Vehicles';
@@ -22,24 +22,26 @@ const App = props => {
 
   return (
       <BrowserRouter>
-        <div className="App">
-        <Header />
-        <Switch>
-          <Route exact path="/" component={Home} />
-          <Route path="/spaceships" render={() => (
-            <Spaceships />)}
-          />
-          <Route path="/vehicles" render={() => (
-            <Vehicles />)}
-          />
-          <Route path="/planets" render={() => (
-            <Planets />)}
-          />
-          <Route path="/spaceships/:id" render={ itemProps => (
-            <Infoitem match={itemProps.match}/>)}
-          />
-        </Switch>
-      </div>
+        <AppGlobalProvider>
+          <div className="App">
+          <Header />
+          <Switch>
+            <Route exact path="/" component={Home} />
+            <Route path="/spaceships" render={() => (
+              <Spaceships />)}
+            />
+            <Route path="/vehicles" render={() => (
+              <Vehicles />)}
+            />
+            <Route path="/planets" render={() => (
+              <Planets />)}
+            />
+            <Route path="/spaceships/:id" render={ itemProps => (
+              <Infoitem match={itemProps.match}/>)}
+            />
+          </Switch>
+        </div>
+      </AppGlobalProvider>
     </BrowserRouter>
   )
 }
